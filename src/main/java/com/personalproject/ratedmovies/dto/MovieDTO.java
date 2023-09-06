@@ -1,5 +1,8 @@
 package com.personalproject.ratedmovies.dto;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 public class MovieDTO {
     private String name;
     private Integer year;
@@ -7,17 +10,19 @@ public class MovieDTO {
     private String director;
     private String nacionality;
     private Double rate;
+    private LocalDateTime createdAt;
 
     public MovieDTO() {}
 
     public MovieDTO(String name, Integer year, String category, String director,
-                    String nacionality, Double rate) {
+                    String nacionality, Double rate, LocalDateTime createdAt) {
         this.name = name;
         this.year = year;
         this.category = category;
         this.director = director;
         this.nacionality = nacionality;
         this.rate = rate;
+        this.createdAt = LocalDateTime.now();
     }
 
     public String getName() {
@@ -66,5 +71,13 @@ public class MovieDTO {
 
     public void setRate(Double rate) {
         this.rate = rate;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }
