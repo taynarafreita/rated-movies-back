@@ -1,9 +1,10 @@
 package com.personalproject.ratedmovies.dto;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.UUID;
 
 public class MovieDTO {
+    private UUID id;
     private String name;
     private Integer year;
     private String category;
@@ -15,7 +16,8 @@ public class MovieDTO {
     public MovieDTO() {}
 
     public MovieDTO(String name, Integer year, String category, String director,
-                    String nacionality, Double rate, LocalDateTime createdAt) {
+                    String nacionality, Double rate) {
+        this.id = UUID.randomUUID();
         this.name = name;
         this.year = year;
         this.category = category;
@@ -23,6 +25,14 @@ public class MovieDTO {
         this.nacionality = nacionality;
         this.rate = rate;
         this.createdAt = LocalDateTime.now();
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getName() {

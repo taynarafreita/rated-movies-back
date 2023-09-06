@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class MovieService {
@@ -18,8 +19,16 @@ public class MovieService {
     }
 
     public MovieDTO addMovie(MovieDTO movie) {
-        movie.setCreatedAt(LocalDateTime.now());
-        movies.add(movie);
-        return movie;
+        MovieDTO newMovie = new MovieDTO(
+                movie.getName(),
+                movie.getYear(),
+                movie.getCategory(),
+                movie.getDirector(),
+                movie.getNacionality(),
+                movie.getRate()
+        );
+
+        movies.add(newMovie);
+        return newMovie;
     }
 }
