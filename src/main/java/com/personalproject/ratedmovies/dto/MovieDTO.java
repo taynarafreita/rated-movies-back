@@ -1,15 +1,24 @@
 package com.personalproject.ratedmovies.dto;
 
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class MovieDTO {
     private UUID id;
+    @Size(max = 200, message = "Name must have a maximum of 200 characters")
     private String name;
     private Integer year;
     private String category;
+    @Size(max = 200, message = "Director must have a maximum of 200 characters")
     private String director;
+    @Size(max = 50, message = "Nacionality must have a maximum of 50 characters")
     private String nacionality;
+    @DecimalMin(value = "0.0", message = "Rate must be between 0 and 5.0")
+    @DecimalMax(value = "5.0", message = "Rate must be between 0 and 5.0")
     private Double rate;
     private LocalDateTime createdAt;
 
