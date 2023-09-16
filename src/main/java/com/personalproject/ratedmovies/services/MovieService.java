@@ -23,6 +23,7 @@ public class MovieService {
                 movie.getName(),
                 movie.getYear(),
                 movie.getCategory(),
+                movie.getSynopsis(),
                 movie.getDirector(),
                 movie.getNacionality(),
                 movie.getRate()

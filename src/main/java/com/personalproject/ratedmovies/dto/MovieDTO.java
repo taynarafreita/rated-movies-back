@@ -14,6 +14,7 @@ public class MovieDTO {
     private String name;
     private Integer year;
     private MovieCategoryEnum category;
+    private String synopsis;
     @Size(max = 200, message = "Director must have a maximum of 200 characters")
     private String director;
     @Size(max = 50, message = "Nacionality must have a maximum of 50 characters")
@@ -25,12 +26,13 @@ public class MovieDTO {
 
     public MovieDTO() {}
 
-    public MovieDTO(String name, Integer year, MovieCategoryEnum category, String director,
+    public MovieDTO(String name, Integer year, MovieCategoryEnum category, String synopsis, String director,
                     String nacionality, Double rate) {
         this.id = UUID.randomUUID();
         this.name = name;
         this.year = year;
         this.category = category;
+        this.synopsis = synopsis;
         this.director = director;
         this.nacionality = nacionality;
         this.rate = rate;
@@ -67,6 +69,14 @@ public class MovieDTO {
 
     public void setCategory(MovieCategoryEnum category) {
         this.category = category;
+    }
+
+    public String getSynopsis() {
+        return synopsis;
+    }
+
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
     }
 
     public String getDirector() {
