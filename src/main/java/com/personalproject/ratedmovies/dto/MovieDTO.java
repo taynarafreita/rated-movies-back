@@ -1,5 +1,6 @@
 package com.personalproject.ratedmovies.dto;
 
+import com.personalproject.ratedmovies.enums.MovieCategoryEnum;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Size;
@@ -12,7 +13,7 @@ public class MovieDTO {
     @Size(max = 200, message = "Name must have a maximum of 200 characters")
     private String name;
     private Integer year;
-    private String category;
+    private MovieCategoryEnum category;
     @Size(max = 200, message = "Director must have a maximum of 200 characters")
     private String director;
     @Size(max = 50, message = "Nacionality must have a maximum of 50 characters")
@@ -24,7 +25,7 @@ public class MovieDTO {
 
     public MovieDTO() {}
 
-    public MovieDTO(String name, Integer year, String category, String director,
+    public MovieDTO(String name, Integer year, MovieCategoryEnum category, String director,
                     String nacionality, Double rate) {
         this.id = UUID.randomUUID();
         this.name = name;
@@ -60,11 +61,11 @@ public class MovieDTO {
         this.year = year;
     }
 
-    public String getCategory() {
+    public MovieCategoryEnum getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(MovieCategoryEnum category) {
         this.category = category;
     }
 
