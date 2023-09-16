@@ -1,26 +1,30 @@
 package com.personalproject.ratedmovies.dto;
 
 import com.personalproject.ratedmovies.enums.MovieCategoryEnum;
-import jakarta.validation.constraints.DecimalMax;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class MovieDTO {
     private UUID id;
-    @Size(max = 200, message = "Name must have a maximum of 200 characters")
+    @NotBlank(message = "is required")
+    @Size(max = 200, message = "must have a maximum of 200 characters")
     private String name;
+   @NotNull(message = "is required")
     private Integer year;
-    private MovieCategoryEnum category;
+   @NotNull(message = "is required")
+   private MovieCategoryEnum category;
     private String synopsis;
-    @Size(max = 200, message = "Director must have a maximum of 200 characters")
+    @NotNull(message = "is required")
+    @Size(max = 200, message = "must have a maximum of 200 characters")
     private String director;
-    @Size(max = 50, message = "Nacionality must have a maximum of 50 characters")
+    @NotNull(message = "is required")
+    @Size(max = 50, message = "must have a maximum of 50 characters")
     private String nacionality;
-    @DecimalMin(value = "0.0", message = "Rate must be between 0 and 5.0")
-    @DecimalMax(value = "5.0", message = "Rate must be between 0 and 5.0")
+    @NotNull(message = "is required")
+    @DecimalMin(value = "0.0", message = "must be between 0 and 5.0")
+    @DecimalMax(value = "5.0", message = "must be between 0 and 5.0")
     private Double rate;
     private LocalDateTime createdAt;
 
