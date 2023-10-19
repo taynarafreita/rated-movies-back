@@ -1,6 +1,8 @@
 package com.personalproject.ratedmovies.dto;
 
 import com.personalproject.ratedmovies.enums.MovieCategoryEnum;
+import com.personalproject.ratedmovies.interfaces.ValidCategoryEnum;
+import com.personalproject.ratedmovies.interfaces.ValidYear;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDateTime;
@@ -8,37 +10,47 @@ import java.util.UUID;
 
 public class MovieDTO {
     private UUID id;
+
     @NotBlank(message = "is required")
     @Size(max = 200, message = "must have a maximum of 200 characters")
     private String name;
-   @NotNull(message = "is required")
+
+    @ValidYear(message = "must be a number")
+    @NotNull(message = "is required")
     private Integer year;
-   @NotNull(message = "is required")
-   private MovieCategoryEnum category;
+
+    @ValidCategoryEnum(message = "must be a CategoryEnum")
+    @NotNull(message = "is required")
+    private MovieCategoryEnum category;
+
     private String synopsis;
+
     @NotNull(message = "is required")
     @Size(max = 200, message = "must have a maximum of 200 characters")
     private String director;
+
     @NotNull(message = "is required")
     @Size(max = 50, message = "must have a maximum of 50 characters")
-    private String nacionality;
+    private String nationality;
+
     @NotNull(message = "is required")
     @DecimalMin(value = "0.0", message = "must be between 0 and 5.0")
     @DecimalMax(value = "5.0", message = "must be between 0 and 5.0")
     private Double rate;
+
     private LocalDateTime createdAt;
 
     public MovieDTO() {}
 
     public MovieDTO(String name, Integer year, MovieCategoryEnum category, String synopsis, String director,
-                    String nacionality, Double rate) {
+                    String nationality, Double rate) {
         this.id = UUID.randomUUID();
         this.name = name;
         this.year = year;
         this.category = category;
         this.synopsis = synopsis;
         this.director = director;
-        this.nacionality = nacionality;
+        this.nationality = nationality;
         this.rate = rate;
         this.createdAt = LocalDateTime.now();
     }
@@ -91,12 +103,12 @@ public class MovieDTO {
         this.director = director;
     }
 
-    public String getNacionality() {
-        return nacionality;
+    public String getNationality() {
+        return nationality;
     }
 
-    public void setNacionality(String nacionality) {
-        this.nacionality = nacionality;
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
     }
 
     public Double getRate() {

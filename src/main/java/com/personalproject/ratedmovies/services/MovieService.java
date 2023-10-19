@@ -25,7 +25,7 @@ public class MovieService {
                 movie.getCategory(),
                 movie.getSynopsis(),
                 movie.getDirector(),
-                movie.getNacionality(),
+                movie.getNationality(),
                 movie.getRate()
         );
 
