@@ -3,10 +3,15 @@ version: '3'
 services:
   postgres:
     image: postgres:latest
-    container_name: rated-movies
+    container_name: rated-movies-db
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: 12345
       POSTGRES_DB: rated_movies_db
     ports:
       - "5432:5432"
+    volumes:
+      - ./db:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

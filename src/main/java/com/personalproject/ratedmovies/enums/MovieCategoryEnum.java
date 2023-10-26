@@ -7,7 +7,7 @@ public enum MovieCategoryEnum {
     COMEDY("Comédia"),
     DOCUMENTARY("Documentário"),
     DRAMA("Drama"),
-    HORROR_MOVIE(""),
+    HORROR_MOVIE("Terror"),
     ROMANCE("Romance"),
     ROMANTIC_COMEDY("Comédia Romântica"),
     SCIFI("Ficção Científica"),
