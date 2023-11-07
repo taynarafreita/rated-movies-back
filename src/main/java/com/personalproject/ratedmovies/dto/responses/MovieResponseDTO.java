@@ -40,6 +40,8 @@ public class MovieDTO {
 
     private LocalDateTime createdAt;
 
+    private LocalDateTime updatedAt;
+
     public MovieDTO() {}
 
     public MovieDTO(String name, Integer year, MovieCategoryEnum category, String synopsis, String director,
@@ -119,7 +121,7 @@ public class MovieDTO {
         this.rate = rate;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public LocalDateTime getCreatedAt(LocalDateTime now) {
         return createdAt;
     }
 
