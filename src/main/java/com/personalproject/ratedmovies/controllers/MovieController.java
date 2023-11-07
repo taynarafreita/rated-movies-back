@@ -1,7 +1,9 @@
 package com.personalproject.ratedmovies.controllers;
 
 import com.personalproject.ratedmovies.commons.ErrorResponse;
-import com.personalproject.ratedmovies.dto.MovieDTO;
+import com.personalproject.ratedmovies.dto.mappers.MovieMapper;
+import com.personalproject.ratedmovies.dto.requests.MovieRequestDTO;
+import com.personalproject.ratedmovies.dto.responses.MovieResponseDTO;
 import com.personalproject.ratedmovies.services.MovieService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +22,21 @@ public class MovieController {
     private MovieService movieService;
 
     @Autowired
-    public MovieController(MovieService movieService) {
+    private MovieMapper movieMapper;
+
+    @Autowired
+    public MovieController(MovieService movieService, MovieMapper movieMapper) {
         this.movieService = movieService;
+        this.movieMapper = movieMapper;
     }
 
     @GetMapping
-    public List<MovieDTO> getAllmovies() {
+    public List<MovieResponseDTO> getAllmovies() {
         return movieService.getAllMovies();
     }
 
     @PostMapping
-    public ResponseEntity<?> addMovie(@Valid @RequestBody MovieDTO movie, BindingResult bindingResult) {
+    public ResponseEntity<?> addMovie(@Valid @RequestBody MovieRequestDTO movieRequestDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             List<String> errors = bindingResult.getFieldErrors().stream()
                     .map(error -> error.getField() + " " + error.getDefaultMessage())
@@ -40,7 +46,7 @@ public class MovieController {
             return ResponseEntity.badRequest().body(errorResponse);
 
         } else {
-            MovieDTO addedMovie = movieService.addMovie((movie));
+            MovieResponseDTO addedMovie = movieService.addMovie((movieRequestDto));
             return ResponseEntity.status(HttpStatus.CREATED).body(addedMovie);
         }
     }

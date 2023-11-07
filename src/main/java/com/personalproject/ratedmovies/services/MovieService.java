@@ -1,35 +1,36 @@
 package com.personalproject.ratedmovies.services;
 
-import com.personalproject.ratedmovies.dto.MovieDTO;
+import com.personalproject.ratedmovies.dto.mappers.MovieMapper;
+import com.personalproject.ratedmovies.dto.requests.MovieRequestDTO;
+import com.personalproject.ratedmovies.dto.responses.MovieResponseDTO;
+import com.personalproject.ratedmovies.models.Movie;
+import com.personalproject.ratedmovies.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class MovieService {
 
-    public List<MovieDTO> movies = new ArrayList<>();
+    private MovieRepository movieRepository;
 
-    public List <MovieDTO> getAllMovies() {
-        return movies;
+    private MovieMapper movieMapper;
+
+    public MovieService(MovieRepository movieRepository, MovieMapper movieMapper) {
+        this.movieRepository = movieRepository;
+        this.movieMapper = movieMapper;
     }
 
-    public MovieDTO addMovie(MovieDTO movie) {
-        MovieDTO newMovie = new MovieDTO(
-                movie.getName(),
-                movie.getYear(),
-                movie.getCategory(),
-                movie.getSynopsis(),
-                movie.getDirector(),
-                movie.getNationality(),
-                movie.getRate()
-        );
+    public List<MovieResponseDTO> getAllMovies() {
+        List<Movie> movies = movieRepository.findAll();
+        return movies.stream().map(movieMapper::toResponseDTO).collect(Collectors.toList());
+    }
 
-        movies.add(newMovie);
-        return newMovie;
+    public MovieResponseDTO addMovie(MovieRequestDTO movieDTO) {
+        Movie movie = movieMapper.toEntity(movieDTO);
+        Movie addedMovie = movieRepository.save(movie);
+        return movieMapper.toResponseDTO(addedMovie);
     }
 }

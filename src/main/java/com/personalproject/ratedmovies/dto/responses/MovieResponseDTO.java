@@ -1,4 +1,4 @@
-package com.personalproject.ratedmovies.dto;
+package com.personalproject.ratedmovies.dto.responses;
 
 import com.personalproject.ratedmovies.enums.MovieCategoryEnum;
 import com.personalproject.ratedmovies.interfaces.ValidCategoryEnum;
@@ -8,7 +8,7 @@ import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class MovieDTO {
+public class MovieResponseDTO {
     private UUID id;
 
     @NotBlank(message = "is required")
@@ -42,10 +42,10 @@ public class MovieDTO {
 
     private LocalDateTime updatedAt;
 
-    public MovieDTO() {}
+    public MovieResponseDTO() {}
 
-    public MovieDTO(String name, Integer year, MovieCategoryEnum category, String synopsis, String director,
-                    String nationality, Double rate) {
+    public MovieResponseDTO(UUID id, String name, Integer year, MovieCategoryEnum category, String synopsis, String director,
+                            String nationality, Double rate, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = UUID.randomUUID();
         this.name = name;
         this.year = year;
@@ -54,7 +54,8 @@ public class MovieDTO {
         this.director = director;
         this.nationality = nationality;
         this.rate = rate;
-        this.createdAt = LocalDateTime.now();
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public UUID getId() {
@@ -121,11 +122,19 @@ public class MovieDTO {
         this.rate = rate;
     }
 
-    public LocalDateTime getCreatedAt(LocalDateTime now) {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
