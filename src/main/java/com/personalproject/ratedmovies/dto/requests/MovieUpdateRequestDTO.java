@@ -1,50 +1,39 @@
 package com.personalproject.ratedmovies.dto.requests;
 
 import com.personalproject.ratedmovies.enums.MovieCategoryEnum;
-import com.personalproject.ratedmovies.interfaces.ValidCategoryEnum;
-import com.personalproject.ratedmovies.interfaces.ValidYear;
 import jakarta.validation.constraints.*;
 
-public class MovieRequestDTO {
+import java.util.UUID;
 
-    @NotBlank(message = "is required")
+public class MovieUpdateRequestDTO {
+
+    private UUID id;
+
     @Size(max = 200, message = "must have a maximum of 200 characters")
     private String name;
 
-    @ValidYear(message = "must be a number")
-    @NotNull(message = "is required")
     private Integer year;
 
-    @ValidCategoryEnum(message = "must be a CategoryEnum")
-    @NotNull(message = "is required")
     private MovieCategoryEnum category;
 
     private String synopsis;
 
-    @NotNull(message = "is required")
     @Size(max = 200, message = "must have a maximum of 200 characters")
     private String director;
 
-    @NotNull(message = "is required")
     @Size(max = 50, message = "must have a maximum of 50 characters")
     private String nationality;
 
-    @NotNull(message = "is required")
     @DecimalMin(value = "0.0", message = "must be between 0 and 5.0")
     @DecimalMax(value = "5.0", message = "must be between 0 and 5.0")
     private Double rate;
 
-    public MovieRequestDTO() {}
+    public UUID getId() {
+        return id;
+    }
 
-    public MovieRequestDTO(String name, Integer year, MovieCategoryEnum category, String synopsis, String director,
-                            String nationality, Double rate) {
-        this.name = name;
-        this.year = year;
-        this.category = category;
-        this.synopsis = synopsis;
-        this.director = director;
-        this.nationality = nationality;
-        this.rate = rate;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getName() {

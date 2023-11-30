@@ -1,43 +1,40 @@
-package com.personalproject.ratedmovies.dto.requests;
+package com.personalproject.ratedmovies.dto.responses;
 
 import com.personalproject.ratedmovies.enums.MovieCategoryEnum;
-import com.personalproject.ratedmovies.interfaces.ValidCategoryEnum;
-import com.personalproject.ratedmovies.interfaces.ValidYear;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Size;
 
-public class MovieRequestDTO {
+import java.time.LocalDateTime;
+import java.util.UUID;
 
-    @NotBlank(message = "is required")
+public class MovieUpdateResponseDTO {
+
     @Size(max = 200, message = "must have a maximum of 200 characters")
     private String name;
 
-    @ValidYear(message = "must be a number")
-    @NotNull(message = "is required")
     private Integer year;
 
-    @ValidCategoryEnum(message = "must be a CategoryEnum")
-    @NotNull(message = "is required")
     private MovieCategoryEnum category;
 
     private String synopsis;
 
-    @NotNull(message = "is required")
     @Size(max = 200, message = "must have a maximum of 200 characters")
     private String director;
 
-    @NotNull(message = "is required")
     @Size(max = 50, message = "must have a maximum of 50 characters")
     private String nationality;
 
-    @NotNull(message = "is required")
     @DecimalMin(value = "0.0", message = "must be between 0 and 5.0")
     @DecimalMax(value = "5.0", message = "must be between 0 and 5.0")
     private Double rate;
 
-    public MovieRequestDTO() {}
+    private LocalDateTime createdAt;
 
-    public MovieRequestDTO(String name, Integer year, MovieCategoryEnum category, String synopsis, String director,
-                            String nationality, Double rate) {
+    private LocalDateTime updatedAt;
+
+    public MovieUpdateResponseDTO(String name, Integer year, MovieCategoryEnum category, String synopsis, String director,
+                            String nationality, Double rate, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.name = name;
         this.year = year;
         this.category = category;
@@ -45,6 +42,8 @@ public class MovieRequestDTO {
         this.director = director;
         this.nationality = nationality;
         this.rate = rate;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public String getName() {
@@ -101,5 +100,21 @@ public class MovieRequestDTO {
 
     public void setRate(Double rate) {
         this.rate = rate;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
